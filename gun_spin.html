@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play GunSpin - CoolScienceCo</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Center content vertically */
+            background-color: #8B0000; /* Darker red background */
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: white;
+            font-size: 4em;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin: 20px 0; /* Space above and below the heading */
+            position: absolute; /* Positioning for fixed header */
+            top: 20px; /* Distance from top */
+        }
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: black; /* Background color for the button */
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .fullscreen-button {
+            padding: 15px 30px;
+            background-color: black; /* Button background color */
+            color: white; /* Button text color */
+            border: 2px solid white; /* White outline */
+            border-radius: 5px; /* Rounded corners */
+            font-size: 18px; /* Button text size */
+            cursor: pointer;
+            transition: background-color 0.3s; /* Smooth background transition */
+        }
+        .fullscreen-button:hover {
+            background-color: white; /* Change to white on hover */
+            color: black; /* Change text color on hover */
+        }
+        iframe {
+            width: 80%;
+            height: 80%;
+            border: none;
+            display: none; /* Hide by default */
+        }
+        .panic-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="home-button">Home</a>
+    <h1>Play GunSpin On CoolScienceCo</h1>
+
+    <button class="fullscreen-button" onclick="openFullscreen()">Must Play GunSpins In Full Screen</button>
+    <iframe id="innerFrame" name="innerFrame" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads" src="https://classroomjq.github.io/gunspin/" style="overflow: auto;"></iframe>
+
+    <button class="panic-button" id="panicButton">Set Panic Button</button>
+
+    <script>
+        let isFullscreen = false; // Track fullscreen state
+        let panicKey = localStorage.getItem('panicKey') || ''; // Load panic key from localStorage
+
+        function openFullscreen() {
+            const iframe = document.getElementById('innerFrame');
+
+            if (!isFullscreen) {
+                iframe.style.display = 'block'; // Show the iframe when entering fullscreen
+                if (iframe.requestFullscreen) {
+                    iframe.requestFullscreen();
+                } else if (iframe.mozRequestFullScreen) { // Firefox
+                    iframe.mozRequestFullScreen();
+                } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari, Opera
+                    iframe.webkitRequestFullscreen();
+                } else if (iframe.msRequestFullscreen) { // IE/Edge
+                    iframe.msRequestFullscreen();
+                }
+                isFullscreen = true; // Update fullscreen state
+            }
+        }
+
+        // Listen for fullscreen change events
+        document.addEventListener('fullscreenchange', onFullscreenChange);
+        document.addEventListener('mozfullscreenchange', onFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+        document.addEventListener('msfullscreenchange', onFullscreenChange);
+
+        function onFullscreenChange() {
+            // Check if fullscreen is exited
+            if (!document.fullscreenElement) {
+                isFullscreen = false; // Reset fullscreen state
+                const iframe = document.getElementById('innerFrame');
+                iframe.style.display = 'none'; // Hide the iframe when exiting fullscreen
+            }
+        }
+
+        // Set panic button functionality
+        document.getElementById('panicButton').addEventListener('click', function() {
+            document.addEventListener('keydown', function setPanicKey(e) {
+                panicKey = e.key;
+                localStorage.setItem('panicKey', panicKey); // Save the panic key to localStorage
+                alert(`Panic key set to: ${panicKey}`);
+                document.removeEventListener('keydown', setPanicKey); // Remove listener after setting
+            });
+        });
+
+        // Function to redirect to Google Classroom if the panic key is pressed
+        document.addEventListener('keydown', function(e) {
+            if (e.key === panicKey) {
+                window.location.href = 'https://classroom.google.com/'; // Redirect to Google Classroom
+            }
+        });
+    </script>
+</body>
+</html>

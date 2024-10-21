@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Slope On CoolScienceCo</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: darkred;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: white;
+            font-size: 4em;
+            text-align: center;
+            margin-top: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px;
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .fullscreen-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+        }
+        iframe {
+            display: block;
+            margin: 0 auto;
+            width: 855px;
+            height: 637px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <button class="home-button" onclick="location.href='index.html';">Home</button>
+    <h1>Play Slope On CoolScienceCo</h1>
+    <iframe id="innerFrame" name="innerFrame" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads" allowfullscreen="" src="https://jeowebsite.github.io/slope/" style="overflow: auto;"></iframe>
+    <button class="fullscreen-button" id="fullscreenButton">Fullscreen</button>
+
+    <script>
+        const fullscreenButton = document.getElementById('fullscreenButton');
+        const innerFrame = document.getElementById('innerFrame');
+
+        fullscreenButton.addEventListener('click', () => {
+            if (innerFrame.requestFullscreen) {
+                innerFrame.requestFullscreen();
+            } else if (innerFrame.mozRequestFullScreen) { // Firefox
+                innerFrame.mozRequestFullScreen();
+            } else if (innerFrame.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                innerFrame.webkitRequestFullscreen();
+            } else if (innerFrame.msRequestFullscreen) { // IE/Edge
+                innerFrame.msRequestFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play StickMerge On CoolScienceCo</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #8B0000; /* Darker red background */
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: white;
+            font-size: 4em;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-top: 20px; /* Adjust margin to position text at the top */
+        }
+
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .panic-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 10;
+        }
+
+        /* Iframe container */
+        .iframe-container {
+            position: relative;
+            width: 855px;
+            height: 637px;
+            margin-top: 20px;
+            border: none;
+        }
+
+        /* Black bar at the top of the iframe */
+        .black-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40px; /* Height of the black bar */
+            background-color: black;
+            z-index: 5;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="home-button">Home</a>
+    <h1>Play StickMerge On CoolScienceCo</h1>
+
+    <div class="iframe-container">
+        <!-- Black bar at the top -->
+        <div class="black-bar"></div>
+
+        <!-- Embedded iframe -->
+        <iframe id="innerFrame" name="innerFrame" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads" 
+            frameborder="0" allowfullscreen="" src="https://webglmath.github.io/stickmerge/index.html" 
+            style="overflow: auto;"></iframe>
+    </div>
+
+    <button class="panic-button" id="panicButton">Set Panic Button</button>
+
+    <script>
+        // Panic Button Functionality
+        let panicKey = null;
+
+        document.getElementById('panicButton').addEventListener('click', () => {
+            document.addEventListener('keydown', setPanicKey);
+        });
+
+        function setPanicKey(event) {
+            panicKey = event.key;
+            alert(`Panic key set to: ${panicKey}`);
+            document.removeEventListener('keydown', setPanicKey);
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === panicKey) {
+                window.location.href = 'https://classroom.google.com/';
+            }
+        });
+    </script>
+</body>
+</html>
