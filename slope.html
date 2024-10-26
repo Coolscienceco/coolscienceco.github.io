@@ -3,24 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Play Slope On CoolScienceCo</title>
+    <title>CoolScienceCo - Unblocked Games</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
-            background-color: darkred;
             font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(45deg, red, black);
+            background-size: 200% 200%;
+            animation: gradientAnimation 10s ease infinite;
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         h1 {
             color: white;
             font-size: 4em;
-            text-align: center;
             margin-top: 20px;
+            text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
-        .home-button {
+        .subtitle {
+            color: white;
+            font-size: 1.5em;
+            text-align: center;
+            margin-top: 5px;
+        }
+        .game-row {
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            margin-top: 40px;
+        }
+        .game-box {
+            width: 16rem;
+            height: 16rem;
+            border: 2px solid black;
+            margin-left: 20px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .gun-spin {
+            background-image: url('https://tse2.mm.bing.net/th?id=OIP.hRN5vG7uN9pB-3IRROpOLgHaHa&pid=Api&P=0&h=220');
+        }
+        .stick-merge {
+            background-image: url('https://tse3.mm.bing.net/th?id=OIP.g_z78YwUA79lN7mNKr8F9AHaHa&pid=Api&P=0&h=220');
+        }
+        .retro-bowl {
+            background-image: url('https://play-lh.googleusercontent.com/WRM5Y1xZmzcCP1YtO5zl6G2g7CU5c5ZfjX4UVrgi1bpNgkfy-wuB-bQx3kkeRfaGYQ');
+        }
+        .tanuki-sunset {
+            background-image: url('https://slope-unblocked.co/data/image/tanuki-sunset.jpg');
+        }
+        .poly-track {
+            background-image: url('https://files.brightestgames.com/games/image_large/2023/06/16/poly-track-game-315x237.jpg');
+        }
+        .slope {
+            background-image: url('https://i.pinimg.com/originals/86/12/00/8612001a80ea5f6720b1a1c11687af88.jpg');
+            /* Add a background image for the slope box */
+            background-image: url('https://live.staticflickr.com/4411/36059416000_9febe11ed5_b.jpg');
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .game-box:hover .overlay {
+            opacity: 0.7;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .search-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .panic-button {
             position: absolute;
             top: 20px;
             left: 20px;
@@ -31,46 +108,81 @@
             cursor: pointer;
             z-index: 10;
         }
-        .fullscreen-button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px;
-            background-color: black;
-            color: white;
-            border: none;
-            cursor: pointer;
-            z-index: 10;
-        }
-        iframe {
-            display: block;
-            margin: 0 auto;
-            width: 855px;
-            height: 637px;
-            border: none;
-        }
     </style>
 </head>
 <body>
-    <button class="home-button" onclick="location.href='index.html';">Home</button>
-    <h1>Play Slope On CoolScienceCo</h1>
-    <iframe id="innerFrame" name="innerFrame" sandbox="allow-scripts allow-popups allow-forms allow-same-origin allow-popups-to-escape-sandbox allow-downloads" allowfullscreen="" src="https://jeowebsite.github.io/slope/" style="overflow: auto;"></iframe>
-    <button class="fullscreen-button" id="fullscreenButton">Fullscreen</button>
+    <h1>CoolScienceCo</h1>
+    <div class="subtitle">Coded & Programmed By Caiden Grant</div>
+    <button class="panic-button" id="panicButton">Set Panic Button</button>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search games..." oninput="searchGames()">
+    </div>
+
+    <!-- First row with four games -->
+    <div class="game-row" id="gameRow">
+        <div class="game-box gun-spin" onclick="location.href='gun_spin.html';">
+            <div class="overlay">Gun Spin</div>
+        </div>
+        <div class="game-box stick-merge" onclick="location.href='stick_merge.html';">
+            <div class="overlay">Stick Merge</div>
+        </div>
+        <div class="game-box retro-bowl" onclick="location.href='retro_bowl.html';">
+            <div class="overlay">Retro Bowl</div>
+        </div>
+        <div class="game-box tanuki-sunset" onclick="location.href='tanuki_sunset.html';">
+            <div class="overlay">Tanuki Sunset</div>
+        </div>
+    </div>
+
+    <!-- Second row with Poly Track and Slope -->
+    <div class="game-row">
+        <div class="game-box poly-track" onclick="location.href='poly_track.html';">
+            <div class="overlay">Poly Track</div>
+        </div>
+        <div class="game-box slope" onclick="location.href='slope.html';">
+            <div class="overlay">Slope</div>
+        </div>
+    </div>
 
     <script>
-        const fullscreenButton = document.getElementById('fullscreenButton');
-        const innerFrame = document.getElementById('innerFrame');
+        // Load the panic key from localStorage
+        let panicKey = localStorage.getItem('panicKey') || '';
 
-        fullscreenButton.addEventListener('click', () => {
-            if (innerFrame.requestFullscreen) {
-                innerFrame.requestFullscreen();
-            } else if (innerFrame.mozRequestFullScreen) { // Firefox
-                innerFrame.mozRequestFullScreen();
-            } else if (innerFrame.webkitRequestFullscreen) { // Chrome, Safari and Opera
-                innerFrame.webkitRequestFullscreen();
-            } else if (innerFrame.msRequestFullscreen) { // IE/Edge
-                innerFrame.msRequestFullscreen();
+        // Function to set the panic button
+        document.getElementById('panicButton').addEventListener('click', function() {
+            document.addEventListener('keydown', function(e) {
+                panicKey = e.key;
+                localStorage.setItem('panicKey', panicKey); // Save the panic key to localStorage
+                alert(`Panic key set to: ${panicKey}`);
+                document.removeEventListener('keydown', arguments.callee); // Remove listener after setting
+            });
+        });
+
+        // Function to close the window if the panic key is pressed
+        document.addEventListener('keydown', function(e) {
+            if (e.key === panicKey) {
+                // Redirect to a blank page before closing
+                window.location.href = 'about:blank'; // This helps to clear history to some extent
+                setTimeout(() => {
+                    window.close(); // This may not work in all browsers due to security restrictions
+                }, 100);
             }
         });
+
+        // Function to search games
+        function searchGames() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const gameBoxes = document.querySelectorAll('.game-box');
+
+            gameBoxes.forEach(box => {
+                const overlayText = box.querySelector('.overlay').textContent.toLowerCase();
+                if (overlayText.includes(input)) {
+                    box.style.display = 'block';
+                } else {
+                    box.style.display = 'none';
+                }
+            });
+        }
     </script>
 </body>
 </html>
